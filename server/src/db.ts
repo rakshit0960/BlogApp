@@ -1,5 +1,6 @@
-import { Pool } from 'pg';
+import { Pool, QueryResult } from 'pg';
 import dotenv from 'dotenv';
+import { hashPassword } from './auth';
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ const pool = new Pool({
   port: parseInt(process.env.DB_PORT || '5432'),
 });
 
-async function initializeDatabase() {
+export async function initializeDatabase() {
   try {
     const client = await pool.connect();
     // test query
@@ -31,5 +32,20 @@ pool.on('error', (err) => {
   process.exit(-1);
 });
 
+export async function createUser(username: string, email: string, password: string, firstName: string, lastName: string) {
+  const hashedPassword = await hashPassword(password);
+  return pool.query(
+    'INSERT INTO users (username, email, password, first_name, last_name) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+    [username, email, hashedPassword, firstName, lastName]
+  );
+}
 
-export { pool as default, initializeDatabase };
+export async function getUserByUsername(username: string) {
+  return pool.query('SELECT * FROM users WHERE username = $1', [username]);
+}
+
+export async function getUserByEmail(email: string) {
+  return pool.query('SELECT * FROM users WHERE email = $1', [email]);
+}
+
+export default pool; 
