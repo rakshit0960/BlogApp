@@ -1,10 +1,50 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { createUser, getUserByEmail, getUserByUsername } from '../../db';
 import { comparePassword, generateToken } from '../../auth';
+import { body, validationResult } from 'express-validator';
 
 const router = express.Router();
 
-router.post('/register', async (req, res) => {
+const registerValidation = [
+  body('username')
+    .trim()
+    .isLength({ min: 3, max: 30 })
+    .withMessage('Username must be between 3 and 30 characters')
+    .matches(/^[a-zA-Z0-9_]+$/)
+    .withMessage('Username can only contain letters, numbers, and underscores'),
+  body('email')
+    .trim()
+    .isEmail()
+    .withMessage('Must be a valid email address')
+    .normalizeEmail(),
+  body('password')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters long')
+    .matches(/\d/)
+    .withMessage('Password must contain a number')
+    .matches(/[A-Z]/)
+    .withMessage('Password must contain an uppercase letter')
+    .matches(/[a-z]/)
+    .withMessage('Password must contain a lowercase letter')
+    .matches(/[!@#$%^&*(),.?":{}|<>]/)
+    .withMessage('Password must contain a special character'),
+  body('firstName')
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage('First name must be between 1 and 50 characters'),
+  body('lastName')
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage('Last name must be between 1 and 50 characters'),
+];
+
+router.post('/register', registerValidation, async (req: Request, res: Response) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const { username, email, password, firstName, lastName } = req.body;
 
@@ -21,7 +61,7 @@ router.post('/register', async (req, res) => {
     }
 
     const result = await createUser(username, email, password, firstName, lastName);
-    const userId = result.rows[0].id;
+    const userId = result.rows[0];
     const token = generateToken(userId, username, email);
     res.status(201).json({ token });
   } catch (err) {
@@ -30,7 +70,20 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+
+// Login validation
+const loginValidation = [
+  body('username').trim().notEmpty().withMessage('Username is required'),
+  body('password').notEmpty().withMessage('Password is required'),
+];
+
+router.post('/login', loginValidation, async (req: Request, res: Response) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const { username, password } = req.body;
     const result = await getUserByUsername(username);

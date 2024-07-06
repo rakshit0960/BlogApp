@@ -3,25 +3,18 @@ import { initializeDatabase } from './db';
 import homeRoute from './routes/home/homeRoutes';
 import authRoutes from './routes/auth/authRoutes';
 import { checkSchema, query, validationResult } from 'express-validator';
+import { authenticateToken } from './auth';
 
 const app = express();
+app.use(express.json());
 const PORT = 3000;
 
 app.use("/", homeRoute);
 app.use('/auth', authRoutes);
 
 // Protected route example
-// app.get('/protected', authenticateToken, (req, res) => {
-//   res.json({ message: 'This is a protected route', user: (req as any).user });
-// });
-app.get('/hello', checkSchema({
-  person: { isEmpty: false }
-}, ["query"]), (req: Request, res: Response) => {
-  const result = validationResult(req);
-  if (result.isEmpty()) {
-    return res.send(`Hello, ${req.query.person}!`);
-  }
-  res.send({ errors: result.array() });
+app.get('/protected', authenticateToken, (req, res) => {
+  res.json({ message: 'This is a protected route', user: (req as any).user });
 });
 
 async function startServer() {

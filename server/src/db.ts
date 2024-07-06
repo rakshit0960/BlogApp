@@ -38,7 +38,7 @@ export async function createUser(username: string, email: string, password: stri
     'INSERT INTO users (username, email, password, first_name, last_name) VALUES ($1, $2, $3, $4, $5) RETURNING id',
     [username, email, hashedPassword, firstName, lastName]
   );
-}
+} 
 
 export async function getUserByUsername(username: string) {
   return pool.query('SELECT * FROM users WHERE username = $1', [username]);
