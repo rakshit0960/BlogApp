@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret-key';
 
@@ -22,8 +22,9 @@ export function verifyToken(token: string): any {
 }
 
 export function authenticateToken(req: Request, res: Response, next: NextFunction) {
+  console.log('header:', req.headers);
   const authHeader = req.headers['authorization'];
-  const token = authHeader;
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) return res.sendStatus(401);
 

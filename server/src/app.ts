@@ -1,9 +1,8 @@
-import express, { Request, Response } from 'express'
-import { initializeDatabase } from './db';
-import homeRoute from './routes/home/homeRoutes';
-import authRoutes from './routes/auth/authRoutes';
-import { checkSchema, query, validationResult } from 'express-validator';
+import express from 'express';
 import { authenticateToken } from './auth';
+import { initializeDatabase } from './db';
+import authRoutes from './routes/auth/authRoutes';
+import homeRoute from './routes/home/homeRoutes';
 
 const app = express();
 app.use(express.json());
@@ -12,7 +11,7 @@ const PORT = 3000;
 app.use("/", homeRoute);
 app.use('/auth', authRoutes);
 
-// Protected route example
+
 app.get('/protected', authenticateToken, (req, res) => {
   res.json({ message: 'This is a protected route', user: (req as any).user });
 });

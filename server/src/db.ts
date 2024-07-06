@@ -1,5 +1,5 @@
-import { Pool, QueryResult } from 'pg';
 import dotenv from 'dotenv';
+import { Pool } from 'pg';
 import { hashPassword } from './auth';
 
 dotenv.config();
