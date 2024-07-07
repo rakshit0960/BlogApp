@@ -22,7 +22,7 @@ export function verifyToken(token: string): any {
 }
 
 export function authenticateToken(req: Request, res: Response, next: NextFunction) {
-  console.log('header:', req.headers);
+  console.log('\nrequest header:', req.headers, 'request body:', req.body, '\n');
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 

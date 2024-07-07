@@ -1,27 +1,19 @@
 import express from 'express';
 import { authenticateToken } from './auth';
 import { initializeDatabase } from './db';
-import authRoutes from './routes/auth/authRoutes';
-import homeRoute from './routes/home/homeRoutes';
+import routes from './routes/routes';
 
 const app = express();
 app.use(express.json());
 const PORT = 3000;
 
-app.use("/", homeRoute);
-app.use('/auth', authRoutes);
-
-
-app.get('/protected', authenticateToken, (req, res) => {
-  res.json({ message: 'This is a protected route', user: (req as any).user });
-});
+// import all routes form ./routes/routes.ts
+app.use(routes);
 
 async function startServer() {
   const dbInitialized = await initializeDatabase();
   if (dbInitialized) {
-    app.listen(3000, () => {
-      console.log(`Server running on port 3000: http://localhost:${PORT}`);
-    });
+    app.listen(3000, () => console.log(`Server running on port 3000: http://localhost:${PORT}`));
   } else {
     console.log('Failed to connect to the database. Server not started.');
     process.exit(1);
