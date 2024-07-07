@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { comparePassword, generateToken } from "../auth";
-import { createUser, getUserByEmail, getUserByUsername, updateUserLoginStatus } from "../db";
+import { createUser, getUserByEmail, getUserByUsername, updateUserLoginStatus } from "../models/userModel";
 
 export const registerUser = async (req: Request, res: Response) => {
   // Check for validation errors
@@ -37,8 +37,9 @@ export const registerUser = async (req: Request, res: Response) => {
 export const loginUser = async (req: Request, res: Response) => {
   // Check for validation errors
   const errors = validationResult(req);
-  if (!errors.isEmpty()) 
+  if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
+  } 
 
   try {
 

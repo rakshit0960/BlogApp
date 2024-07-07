@@ -37,8 +37,9 @@ export async function authenticateToken(req: Request, res: Response, next: NextF
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) 
+  if (!token) {
     return res.status(401).json({ message: 'No token provided' });
+  } 
 
   try {
     // Decode jwt token
@@ -46,8 +47,9 @@ export async function authenticateToken(req: Request, res: Response, next: NextF
     
     // Check if user is logged in
     const result = await pool.query('SELECT is_logged_in FROM users WHERE id = $1', [decodedPayload.userId]);
-    if (result.rows.length === 0 || !result.rows[0].is_logged_in) 
+    if (result.rows.length === 0 || !result.rows[0].is_logged_in) {
       return res.status(401).json({ message: 'User is not logged in' });
+    }
 
     // add decodedPayload to request object
     (req as any).user = decodedPayload;
@@ -57,8 +59,9 @@ export async function authenticateToken(req: Request, res: Response, next: NextF
 
   } catch (err) {
 
-    if (err instanceof jwt.TokenExpiredError) 
+    if (err instanceof jwt.TokenExpiredError)  {
       return res.status(401).json({ message: 'Token expired' });
+    }
 
     return res.status(403).json({ message: 'Invalid token' });
 
