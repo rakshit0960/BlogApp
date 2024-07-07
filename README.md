@@ -23,7 +23,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd BlogApp
+  cd BlogApp/server
 ```
 
 Install dependencies
