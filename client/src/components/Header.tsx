@@ -2,9 +2,10 @@ import { NavLink } from "react-router-dom"
 import { Input } from "./ui/input"
 import ProfileDropdown from "./ProfileDropdown"
 import { MountainIcon, SearchIcon } from "../assets/icons"
+import { ThemeModeToggle } from "./ThemeModeToggle"
 
 
-export default function NavBar() {
+export default function Header() {
   return (
     <header className="fixed top-0 z-50 w-full bg-opacity-30 backdrop-blur-md border-border">
       <div className="container flex items-center h-16 px-4 md:px-6">
@@ -17,13 +18,16 @@ export default function NavBar() {
             Home
           </NavLink>
           <NavLink to="#" className="text-foreground hover:text-primary" >
-            Blog
+            Blogs
           </NavLink>
           <NavLink to="#" className="text-foreground hover:text-primary" >
             About
           </NavLink>
           <NavLink to="#" className="text-foreground hover:text-primary" >
-            Contact
+            Write
+          </NavLink>
+          <NavLink to="https://github.com/rakshit0960/BlogApp" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary" >
+            GitHub
           </NavLink>
         </nav>
         <div className="ml-auto relative flex-1 max-w-sm">
@@ -38,6 +42,9 @@ export default function NavBar() {
         </div>
         <div className="hidden px-4 md:block">
           <ProfileDropdown />
+        </div>
+        <div className="hidden md:block">
+          <ThemeModeToggle />
         </div>
       </div>
     </header>

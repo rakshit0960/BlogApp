@@ -4,7 +4,7 @@ import { HeartIcon, MessageCircleIcon } from "../assets/icons";
 
 export default function BlogItem() {
   return (
-  <div className="grid lg:grid-cols-6 w-[80%] items-center  overflow-hidden rounded-lg lg:gap-4 p-2 border-2 border-gray-500">
+  <div className="grid lg:grid-cols-6 w-[80%] items-center overflow-hidden rounded-lg lg:gap-4 p-2 border-2 border-gray-500">
       <Link  to="#" className="row-span-1 lg:row-span-1 lg:order-1 overflow-hidden rounded-lg lg:col-span-2 aspect-video">
         <img
           src="https://plus.unsplash.com/premium_photo-1720020552749-a103c0157ff3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

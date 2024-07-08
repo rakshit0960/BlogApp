@@ -1,6 +1,6 @@
 import { GitlabIcon } from "lucide-react"
 import { Link } from "react-router-dom"
-import { Input } from "..//components/ui/input"
+import { Input } from "../components/ui/input"
 import { MountainIcon } from "../assets/icons"
 import { Button } from "../components/ui/button"
 
@@ -17,7 +17,7 @@ export default function RegisterPage() {
           </div>
           <div className="pb-8">
             <blockquote className="text-lg italic">
-              "This library has saved me countless hours of work and helped me\n deliver stunning designs to my clients
+              "This Blog Site has saved me countless hours of work and helped me write and read blogs  
               faster than ever before."
             </blockquote>
             <p className="mt-4 text-sm">Sofia Davis</p>
@@ -42,7 +42,7 @@ export default function RegisterPage() {
               <div className="flex items-center justify-center space-x-2">
                 <span className="text-sm text-gray-400">OR CONTINUE WITH</span>
               </div>
-              <Button variant="secondary" className="w-full cursor-not-allowed">
+              <Button variant="outline" className="w-full cursor-not-allowed">
                 <GitlabIcon className="w-5 h-5 mr-2" />
                 GitHub
               </Button>

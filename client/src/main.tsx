@@ -1,19 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import HomePage from './pages/HomePagge'
-import RegisterPage from './pages/Register'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "./components/contexts/theme-provider";
+import "./index.css";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <div className='dark bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900'>
+      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
-      </div>
+      </ThemeProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
