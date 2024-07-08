@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom"
 import { Input } from "./ui/input"
 import ProfileDropdown from "./ProfileDropdown"
+import { MountainIcon, SearchIcon } from "../assets/icons"
 
 
 export default function NavBar() {
   return (
-    <header className="fixed top-0 z-50 w-full bg-background border-b border-border">
+    <header className="fixed top-0 z-50 w-full bg-opacity-30 backdrop-blur-md border-border">
       <div className="container flex items-center h-16 px-4 md:px-6">
         <NavLink to="#" className="mr-6 flex items-center gap-2" >
           <MountainIcon className="h-6 w-6" />
@@ -44,41 +45,3 @@ export default function NavBar() {
 }
 
 
-function MountainIcon(props: { className?: string }) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
-  )
-}
-
-function SearchIcon(props: { className?: string }) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  )
-}

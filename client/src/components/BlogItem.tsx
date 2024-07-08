@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { HeartIcon, MessageCircleIcon } from "../assets/icons";
 
 export default function BlogItem() {
   return (
-  <div className="grid lg:grid-cols-6 w-[80%] items-center border-2 overflow-hidden rounded-lg lg:gap-4 p-2 cursor-pointer">
+  <div className="grid lg:grid-cols-6 w-[80%] items-center  overflow-hidden rounded-lg lg:gap-4 p-2 border-2 border-gray-500">
       <Link  to="#" className="row-span-1 lg:row-span-1 lg:order-1 overflow-hidden rounded-lg lg:col-span-2 aspect-video">
         <img
           src="https://plus.unsplash.com/premium_photo-1720020552749-a103c0157ff3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -45,41 +46,3 @@ export default function BlogItem() {
   )
 }
 
-function HeartIcon(props: {className?: string}) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-    </svg>
-  )
-}
-
-
-function MessageCircleIcon(props: {className?: string}) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-    </svg>
-  )
-}
