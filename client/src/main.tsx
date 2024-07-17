@@ -16,7 +16,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/temp" element={<Temp />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
