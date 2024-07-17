@@ -6,7 +6,6 @@ import "./index.css";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import Temp from "./pages/Temp";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
